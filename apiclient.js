@@ -3,7 +3,7 @@ var request = require('request');
 function getNyTimesNews(){
     console.log("getNyTimes");
 
-
+    //FIXME add request parameter for date
     request('http://api.nytimes.com/svc/topstories/v1/home.json?api-key=280e9e9dd28e9bb3cef90aae49daa39f:7:73666688', function (error, response, body) {
         if (!error && response.statusCode == 200) {
             response = JSON.parse(body);
@@ -15,6 +15,7 @@ function getNyTimesNews(){
                     section: article["section"],
                     title:   article["title"],
                     pubDate: article["updated_date"]
+                    //FIXME tags
                 };
                 console.log(articleEntry);
                 articles.push(articleEntry);

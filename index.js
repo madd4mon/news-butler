@@ -7,11 +7,13 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 app.get('/', function (req, res) {
-  res.render('home');
+    res.render('home');
 });
 
 app.get('/users/emmy', function (req, res) {
-  res.render('dashboard');
+    var db = require('./db');
+    var articles = db.getArticles()
+    res.render('dashboard');
 });
 
 app.get('/users/emmy/settings', function (req, res) {
@@ -22,10 +24,10 @@ app.get('/users/emmy/settings', function (req, res) {
 app.use(express.static(__dirname + '/public'));
 
 var server = app.listen(3000, function () {
-  var host = server.address().address;
-  var port = server.address().port;
+    var host = server.address().address;
+    var port = server.address().port;
 
-  console.log('Example app listening at http://%s:%s', host, port);
+    console.log('News Butler listening at http://%s:%s', host, port);
 });
 
 

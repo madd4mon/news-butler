@@ -1,9 +1,10 @@
 var MongoClient = require('mongodb').MongoClient
     , format = require('util').format;
 
-var insertArticles = function (newArticles) {
+var DB_CONNECTION = 'mongodb://127.0.0.1:27017/newsbutler';
 
-    MongoClient.connect('mongodb://127.0.0.1:27017/newsbutler', function (err, db) {
+var insertArticles = function (newArticles) {
+    MongoClient.connect(DB_CONNECTION, function (err, db) {
         if (err) throw err;
         var collection = db.collection('article');
         collection.insertMany(newArticles, function (err, docs) {
@@ -12,4 +13,17 @@ var insertArticles = function (newArticles) {
     });
 };
 
+//FIXME add date
+var getArticles = function (){
+    MongoClient.connect(DB_CONNECTION, function(err, db) {
+        if(err) throw err;
+        var collection = db.collection('article');
+        collection.find().toArray(function(err, results) {
+            console.log(results);
+            db.close();
+        });
+    });
+};
+
 exports.insertArticles = insertArticles;
+exports.getArticles = getArticles;
