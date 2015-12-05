@@ -1,4 +1,5 @@
 "Menu" by Konstantinos Riginos
 "Check mark", "Close", "Down", "Up", "Minus", "Plus" by Tonga Chalita
+"Gear" by Aha-Soft
 
 Licensed under Creative Commons
