@@ -1,5 +1,5 @@
 <header>
-  <a id="settings" href="#">
+  <a id="settings" href="settings">
     <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="960px" height="560px" viewBox="0 0 960 560" enable-background="new 0 0 960 560" xml:space="preserve">
     <path d="M481,78.4c-8.153,0-16.363,0.636-24.5,1.54c-5.209,0.579-9.66,5.131-9.66,11.06v31.92c0,4.447-3.612,9.072-8.12,10.36
       c-11.063,3.161-21.609,7.117-31.08,12.6c-4.625,2.678-9.534,2.105-13.3-1.54l-23.1-22.26c-4.16-4.026-10.142-4.268-14.7-0.7
@@ -26,4 +26,12 @@
 
 <h1>Dashboard</h1>
 
-{{#each articles}} <a href="{{url}}">{{title}}</a><br/>{{/each}}
+<p id="greeting">
+  Very well, here are your news, master.
+</p>
+
+<div id="newsbox">
+  {{#each articles}}
+    <a href="{{url}}" class="news" target="_blank">{{title}}</a><br/>
+  {{/each}}
+</div>

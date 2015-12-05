@@ -17,7 +17,7 @@ app.get('/users/emmy', function (req, res) {
     });
 });
 
-app.get('/users/emmy/settings', function (req, res) {
+app.get(/settings/, function (req, res) {
   res.render('settings');
 });
 
