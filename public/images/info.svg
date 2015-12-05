@@ -3,9 +3,7 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="960px" height="560px" viewBox="0 0 960 560" enable-background="new 0 0 960 560" xml:space="preserve">
-<g>
-	<rect x="205.6" y="54.06" width="550.8" height="85.68"/>
-	<rect x="205.6" y="421.26" width="550.8" height="85.681"/>
-	<rect x="205.6" y="237.66" width="550.8" height="85.68"/>
-</g>
+<path d="M516,56c-19.334,0-35,15.666-35,35s15.666,35,35,35s35-15.666,35-35S535.334,56,516,56z M467,154c-30.8,0-56,25.2-56,56v14
+	h14v-14c0-11.2,9.8-21,21-21s21,11.2,21,21s-56,207.2-56,238s25.2,56,56,56s56-25.2,56-56v-14h-14v14c0,11.2-9.8,21-21,21
+	s-21-9.8-21-21s56-210,56-238S497.8,154,467,154z"/>
 </svg>

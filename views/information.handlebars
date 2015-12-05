@@ -30,7 +30,7 @@
     </svg>
   </a>
 
-  <a id="information" href="/information">
+  <a href="/information" id="information">
     <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="960px" height="560px" viewBox="0 0 960 560" enable-background="new 0 0 960 560" xml:space="preserve">
     <path d="M516,56c-19.334,0-35,15.666-35,35s15.666,35,35,35s35-15.666,35-35S535.334,56,516,56z M467,154c-30.8,0-56,25.2-56,56v14
     	h14v-14c0-11.2,9.8-21,21-21s21,11.2,21,21s-56,207.2-56,238s25.2,56,56,56s56-25.2,56-56v-14h-14v14c0,11.2-9.8,21-21,21
@@ -63,24 +63,32 @@
   </a>
 </header>
 
-<h1>Settings</h1>
+<h1>About project</h1>
 
 <p id="greeting">
-  Do you want to change something?
+  So you're curious, huh?
 </p>
 
 <div id="newsbox">
-  <form>
-    <label for="current-mail">Your current mail address: </label><input type="mail" name="current-mail" value="emmy@test.de" disabled>
-    <br /><br />
-    <label for="new-mail">Type in your new mail address: </label><input type="mail" name="new-mail">
-    <br /><br />
-    <button type="submit">Change the mail address</button>
-  </form>
-    <br /><br /><br /><br />
-  <form>
-    <label for="current-time">When do you want your news? </label><input type="time" name="current-time" value="emmy@test.de">
-    <br /><br />
-    <button type="submit">Change the news delivery time</button>
-  </form>
+  <p>
+    <strong>News Butler</strong> is a tool that aims to encourage regular news consumption. In the background the software collects permalinks to news content from two providers (New York Times and The Guardian at the moment). These articles are scanned by a text analytics software which then generates keywords. The the keywords are accumulated and sorted by number and date.
+  </p>
+
+  <p>
+    On the front end the user enters his or her mail address and a time of day during which news consumption (or the reminder to do so) is welcome. At the set time a mail is sent to the user with a unique hyperlink which leads to his personal news overview for the day.
+  </p>
+
+  <p>
+    You can find the source code and even more info on <a href="https://github.com/xushu42/news-butler" target="_blank">GitHub</a>.
+  </p>
+
+  <p>
+    News Butler was created by <a href="https://twitter.com/ckoppelt" target="_blank">Christine Koppelt</a>, <a href="https://twitter.com/VBernlocher" target="_blank">Viola Bernlocher</a> and <a href="https://twitter.com/madd4mon" target="_blank">Henry Lai</a> during #djhack by <a href="http://medialab-bayern.de/" target="_blank">MediaLab Bayern</a>.
+  </p>
+
+  <p>
+    <center>
+      &copy; News Butler 2015
+    </center>
+  </p>
 </div>

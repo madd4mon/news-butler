@@ -29,11 +29,21 @@ h1 {
   text-align: center;
 }
 
+a, a:visited {
+  color: #AC5549;
+  text-decoration: underline;
+}
+
+a:hover, a:active {
+  color: #3B1717;
+  text-decoration: none;
+}
+
 header {
   max-width: 100%;
   width: 100%;
   height: 60px;
-  position: fixed;
+  position: absolute;
   z-index: 999;
   left: 0;
   top: 0;
@@ -43,15 +53,30 @@ header svg {
   fill: #AC5549;
 }
 
-#settings {
+header svg:hover {
+  fill:#3B1717;
+}
+
+#settings, #information, #dashboard {
   position: absolute;
-  top: 0;
-  right: 0;
+  right: 80px;
   text-align: right;
   cursor: pointer;
 }
 
-#settings svg {
+#dashboard {
+  right: 160px;
+}
+
+#information {
+  right: 80px;
+}
+
+#settings {
+  right: 0;
+}
+
+#settings svg, #information svg, #dashboard svg {
   width: 80px;
   height: 80px;
 }
@@ -230,6 +255,10 @@ header svg {
 #newsbox {
   max-width: 960px;
   margin: 30px auto 0 auto;
+}
+
+#newsbox p {
+  margin-bottom: 15px;
 }
 
 a.news, a.news:visited {
