@@ -12,8 +12,9 @@ app.get('/', function (req, res) {
 
 app.get('/users/emmy', function (req, res) {
     var db = require('./db');
-    var articles = db.getArticles()
-    res.render('dashboard');
+    var articles = db.getArticles(function (articles){
+        res.render('dashboard', {articles: articles});
+    });
 });
 
 app.get('/users/emmy/settings', function (req, res) {
