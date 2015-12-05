@@ -1,9 +1,31 @@
-<div id="intro">
-  <img src="/images/logo.png" alt="News Butler" id="logo" />
+<div id="page1" class="intro">
+  <!-- <img src="/images/logo.png" id="logo" alt="News Butler logo" /> -->
   <h1>
-    Welcome to the news butler!
+    Welcome to News Butler!
   </h1>
   <p>
-    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+    I am your personal news servant. I pick the freshest and most relevant news from a handful of trustworthy pages around the web and present them to you as a little snack - whenever you are ready for a prompt update about what’s happening in the outside world.
+  </p>
+  <p id="booking">
+    May I ask you to click here, to book my services?
   </p>
 </div>
+
+<div id="page2" class="intro">
+  <div id="registration">
+      <h1>Please tell me: When and where to?</h1>
+      <form accept-charset="UTF-8" method="post">
+        <input type="mail" required name="mail" placeholder="Your email adress">
+        <input type="time" required name="time">
+        <button type="submit" name="action">Bring it!</button>
+      </form>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $("#booking").click(function(){
+      $("#page1").css("margin-top","-200%");
+    });
+  });
+</script>
