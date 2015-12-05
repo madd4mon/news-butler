@@ -24,3 +24,12 @@ var server = app.listen(3000, function () {
 
   console.log('Example app listening at http://%s:%s', host, port);
 });
+
+
+var CronJob = require('cron').CronJob;
+new CronJob('0 * * * * *', function() {
+    var apiclient = require('./apiclient');
+    apiclient.getNyTimesNews();
+    apiclient.getGuardianNews();
+    console.log('You will see this message every minute');
+}, null, true, 'Europe/Berlin');
