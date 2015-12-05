@@ -2,9 +2,9 @@
 
 ## Install dependencies
 
-'''
+```
 npm install
-'''
+```
 
 
 ## Views
