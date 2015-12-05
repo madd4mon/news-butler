@@ -34,5 +34,5 @@ new CronJob('0 * * * * *', function() {
     var apiclient = require('./apiclient');
     apiclient.getNyTimesNews();
     apiclient.getGuardianNews();
-    console.log('You will see this message every minute');
+    console.log('APIs will be requested by cron job');
 }, null, true, 'Europe/Berlin');
