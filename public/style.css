@@ -209,6 +209,18 @@ header svg {
   }
 }
 
+@media screen and (max-width:1100px) and (orientation:landscape) {
+  #page2 #registration {
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width:800px) and (orientation:landscape) {
+  #page2 #registration {
+    margin-top: 10%;
+  }
+}
+
 /* Dashboard */
 
 #greeting {
