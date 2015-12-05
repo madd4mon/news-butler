@@ -35,7 +35,8 @@ var server = app.listen(3000, function () {
 var CronJob = require('cron').CronJob;
 new CronJob('0 * * * * *', function() {
     var apiclient = require('./apiclient');
+    console.log('APIs will be requested by cron job');
     apiclient.getNyTimesNews();
     apiclient.getGuardianNews();
-    console.log('APIs will be requested by cron job');
+
 }, null, true, 'Europe/Berlin');
