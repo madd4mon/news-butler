@@ -37,6 +37,7 @@ new CronJob('0 * * * * *', function() {
     var apiclient = require('./apiclient');
     console.log('APIs will be requested by cron job');
     apiclient.getNyTimesNews();
-    apiclient.getGuardianNews();
+    apiclient.getGuardianNews()
+
 
 }, null, true, 'Europe/Berlin');
