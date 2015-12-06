@@ -11,9 +11,9 @@ var getNyTimesNews = function(){
             var response = JSON.parse(body);
             var articles = [];
             response["results"].forEach(function(article){
-                console.log(article);
                 var mom = moment(article["updated_date"], "YYYY-MM-DD HH:mm+-HH:mm");
                 var url = article["url"];
+                //getConceptsForUrl(url);
                 var articleEntry = {
                     _id:     ObjectID(hashCode(url)),
                     url:     url,
@@ -23,7 +23,6 @@ var getNyTimesNews = function(){
                     pubDate: mom.toISOString()
                     //FIXME tags
                 };
-                console.log(articleEntry);
                 articles.push(articleEntry);
             });
             db.insertArticles(articles);
@@ -47,7 +46,6 @@ var getGuardianNews = function(){
                     title:   article["webTitle"],
                     pubdate: article["webPublicationDate"]
                 };
-                console.log(articleEntry);
                 articles.push(articleEntry);
             });
             db.insertArticles(articles);
@@ -55,13 +53,29 @@ var getGuardianNews = function(){
     });
 };
 
+var getConceptsForUrl = function (article_url){
+    var encoded_uri = encodeURI(article_url);
+    var apikey = "32cc71fb360c95cd7a1644510db5c5267e79060c";
+    var url = "http://gateway-a.watsonplatform.net/calls/url/URLGetRankedConcepts?apikey=" + apikey
+    + "&url=" + encoded_uri + "&outputMode=json";
+    request(url, function (error, resp, body) {
+        if (!error && resp.statusCode == 200) {
+            var concepts = JSON.parse(body)["concepts"];
+            concepts.forEach(function(concept){
+                var concept = concept["text"];
+                var relevance = concept["relevance"];
+            })
+        }
+    });
+};
+
 var hashCode = function(string){
     var hash = 0;
-    if (this.length == 0) return hash;
-    for (i = 0; i < this.length; i++) {
-        char = this.charCodeAt(i);
+    if (string.length == 0) return hash;
+    for (i = 0; i < string.length; i++) {
+        char = string.charCodeAt(i);
         hash = ((hash<<5)-hash)+char;
-        hash = hash & hash; // Convert to 32bit integer
+        hash = hash & hash;
     }
     return hash;
 };
