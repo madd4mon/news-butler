@@ -1,3 +1,4 @@
+var request = require('request');
 var MongoClient = require('mongodb').MongoClient
     , format = require('util').format;
 
@@ -10,9 +11,11 @@ var insertArticles = function (newArticles) {
         newArticles.forEach(function(article){
             collection.count({url: article["url"]}, function(err, count){
                 if (count == 0){
-                    collection.insertOne(article, function (err, docs) {
-
+                    getConceptsForUrl(article, function (tags){
+                        article["tags"] = tags;
+                        collection.insertOne(article, function (err, docs) {console.log("added article to db");});
                     });
+
                 }
             })
         });
@@ -42,6 +45,32 @@ var getConfigValue = function (cf){
             cf(results);
             db.close();
         });
+    });
+};
+
+
+var getConceptsForUrl = function (article_url, cb){
+    var encoded_uri = encodeURI(article_url);
+    var apikey = "32cc71fb360c95cd7a1644510db5c5267e79060c";
+    var url = "http://gateway-a.watsonplatform.net/calls/url/URLGetRankedConcepts?apikey=" + apikey
+        + "&url=" + encoded_uri + "&outputMode=json";
+    request(url, function (error, resp, body) {
+        var tags = [];
+        if (!error && resp.statusCode == 200) {
+            var concepts = JSON.parse(body)["concepts"];
+            console.log(concepts);
+            concepts.forEach(function(concept){
+                var conc = concept["text"];
+                var relevance = concept["relevance"];
+                if (parseFloat(relevance) > 0.5){
+                    tags.push(conc);
+                }
+            });
+            console.log(tags);
+        } else {
+            console.log ("error" + err);
+        }
+        cb(tags);
     });
 };
 
