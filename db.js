@@ -38,20 +38,22 @@ var getArticles = function (cf){
 };
 
 
-var getTags = function (cf){
+var getTagsWithArticles = function (cf){
     MongoClient.connect(DB_CONNECTION, function(err, db) {
         if(err) throw err;
         var collection = db.collection('article');
         collection.aggregate([
             { $project : {
                 url : 1,
-                tags : 1
+                tags : 1,
+                title: 1,
+                pubDate: 1
             }},
             { $unwind : "$tags" },
             { $group : {
                 _id : {tag : "$tags"},
                 count: { $sum: 1 },
-                urls : { $addToSet : "$url" }
+                articles : { $addToSet : "$$ROOT" }
             }},
             { $sort : { "count" : -1}}
         ], function(err, results) {
@@ -89,4 +91,4 @@ var getConceptsForUrl = function (article_url, cb){
 
 exports.insertArticles = insertArticles;
 exports.getArticles = getArticles;
-exports.getTags = getTags;
+exports.getTagsWithArticles = getTagsWithArticles;
