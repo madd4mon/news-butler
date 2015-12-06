@@ -9,15 +9,17 @@ var insertArticles = function (newArticles) {
         if (err) throw err;
         var collection = db.collection('article');
         newArticles.forEach(function(article){
-            collection.count({url: article["url"]}, function(err, count){
-                if (count == 0){
-                    getConceptsForUrl(article, function (tags){
-                        article["tags"] = tags;
-                        collection.insertOne(article, function (err, docs) {console.log("added article to db");});
-                    });
+            setTimeout(function () {
+                collection.count({url: article["url"]}, function(err, count){
+                    if (count == 0){
+                        getConceptsForUrl(article["url"], function (tags){
+                            article["tags"] = tags;
+                            collection.insertOne(article, function (err, docs) {console.log("added article to db");});
+                        });
+                    }
+                });
+            }, 1000);
 
-                }
-            })
         });
     });
 };
@@ -52,13 +54,12 @@ var getConfigValue = function (cf){
 var getConceptsForUrl = function (article_url, cb){
     var encoded_uri = encodeURI(article_url);
     var apikey = "32cc71fb360c95cd7a1644510db5c5267e79060c";
-    var url = "http://gateway-a.watsonplatform.net/calls/url/URLGetRankedConcepts?apikey=" + apikey
-        + "&url=" + encoded_uri + "&outputMode=json";
+    var url = "http://gateway-a.watsonplatform.net/calls/url/URLGetRankedConcepts?apikey=" + apikey + "&url=" + encoded_uri + "&outputMode=json";
     request(url, function (error, resp, body) {
         var tags = [];
         if (!error && resp.statusCode == 200) {
             var concepts = JSON.parse(body)["concepts"];
-            console.log(concepts);
+            console.log(body);
             concepts.forEach(function(concept){
                 var conc = concept["text"];
                 var relevance = concept["relevance"];
