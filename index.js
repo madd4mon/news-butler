@@ -1,5 +1,6 @@
 var express = require('express');
 var exphbs  = require('express-handlebars');
+var bodyParser = require('body-parser')
 
 var app = express();
 
@@ -24,6 +25,39 @@ app.get(/information/, function (req, res) {
 
 app.get(/settings/, function (req, res) {
   res.render('settings');
+});
+
+//Mail function
+
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    secureConnection: true,
+    auth: {
+        user: 'newsbutler.jenkins@googlemail.com',
+        pass: 'howcaniserveyou'
+    }
+});
+
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+app.post(/mail/, urlencodedParser, function (req, res, next) {
+  // setup e-mail data with unicode symbols
+  var mailOptions = {
+      from: 'Newsbutler Jenkins <newsbutler.jenkins@googlemail.com>',
+      to: req.body.mail, // list of receivers
+      subject: 'Your news summary is ready', // Subject line
+      text: 'Hello world' // plaintext body
+  };
+
+  // send mail with defined transport object
+  transporter.sendMail(mailOptions, function(error, info){
+      if(error){
+          return console.log(error);
+      }
+      res.render('home');
+  });
 });
 
 //Add static folder
