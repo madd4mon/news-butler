@@ -38,17 +38,29 @@ var getArticles = function (cf){
 };
 
 
-var getConfigValue = function (cf){
+var getTags = function (cf){
     MongoClient.connect(DB_CONNECTION, function(err, db) {
         if(err) throw err;
         var collection = db.collection('article');
-        collection.find().toArray(function(err, results) {
-            console.log(results);
+        collection.aggregate([
+            { $project : {
+                url : 1,
+                tags : 1
+            }},
+            { $unwind : "$tags" },
+            { $group : {
+                _id : {tag : "$tags"},
+                count: { $sum: 1 },
+                urls : { $addToSet : "$url" }
+            }},
+            { $sort : { "count" : -1}}
+        ], function(err, results) {
             cf(results);
             db.close();
         });
     });
 };
+
 
 
 var getConceptsForUrl = function (article_url, cb){
@@ -77,3 +89,4 @@ var getConceptsForUrl = function (article_url, cb){
 
 exports.insertArticles = insertArticles;
 exports.getArticles = getArticles;
+exports.getTags = getTags;

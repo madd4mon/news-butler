@@ -10,16 +10,10 @@ app.get('/', function (req, res) {
     res.render('home');
 });
 
-app.get('/users/emmy', function (req, res) {
-    var db = require('./db');
-    var articles = db.getArticles(function (articles){
-        res.render('dashboard', {articles: articles});
-    });
-});
-
 app.get(/dashboard/, function (req, res) {
-    var db = require('./db');
-    var articles = db.getArticles(function (articles){
+    var relevant = require('./relevantArticles');
+    relevant.getArticles(function (articles){
+        console.log(articles);
         res.render('dashboard', {articles: articles});
     });
 });
@@ -42,6 +36,7 @@ var server = app.listen(3000, function () {
     console.log('News Butler listening at http://%s:%s', host, port);
 });
 
+// every minute request the APIs from guardian and new york times
 
 var CronJob = require('cron').CronJob;
 new CronJob('0 * * * * *', function() {
