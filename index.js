@@ -17,6 +17,17 @@ app.get('/users/emmy', function (req, res) {
     });
 });
 
+app.get(/dashboard/, function (req, res) {
+    var db = require('./db');
+    var articles = db.getArticles(function (articles){
+        res.render('dashboard', {articles: articles});
+    });
+});
+
+app.get(/information/, function (req, res) {
+  res.render('information');
+});
+
 app.get(/settings/, function (req, res) {
   res.render('settings');
 });
