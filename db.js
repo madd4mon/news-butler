@@ -89,6 +89,22 @@ var getConceptsForUrl = function (article_url, cb){
     });
 };
 
+var addUser = function (username,usermail,settime) {
+    MongoClient.connect(DB_CONNECTION, function(err, db) {
+        if(err) throw err;
+        var collection = db.collection('user');
+        //Convert time
+        var stringToTime = settime.split(":");
+        var newtime = new Date();
+        newtime.setHours(stringToTime[0]);
+        newtime.setMinutes(stringToTime[1]);
+        //Add user to db
+        var user = {name:username, mail:usermail, time:newtime};
+        collection.insert(user);
+    });
+};
+
 exports.insertArticles = insertArticles;
 exports.getArticles = getArticles;
 exports.getTagsWithArticles = getTagsWithArticles;
+exports.addUser = addUser;

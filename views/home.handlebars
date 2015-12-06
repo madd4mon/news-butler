@@ -15,7 +15,8 @@
 <div id="page2" class="intro">
   <div id="registration">
       <h1>Please tell me: When and where to?</h1>
-      <form action="/mail" accept-charset="UTF-8" method="post">
+      <form action="/adduser" accept-charset="UTF-8" method="post">
+        <input type="text" required name="name" placeholder="Tell me your name">
         <input type="mail" required name="mail" placeholder="Your email adress">
         <input type="time" required name="time">
         <button type="submit" name="action">Bring it!</button>

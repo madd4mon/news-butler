@@ -27,7 +27,7 @@ app.get(/settings/, function (req, res) {
   res.render('settings');
 });
 
-//Mail function
+//Mail and basic user administration function
 
 var nodemailer = require('nodemailer');
 
@@ -42,13 +42,33 @@ var transporter = nodemailer.createTransport({
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-app.post(/mail/, urlencodedParser, function (req, res, next) {
-  // setup e-mail data with unicode symbols
+// app.post(/mail/, urlencodedParser, function (req, res, next) {
+//   // setup e-mail data with unicode symbols
+//   var mailOptions = {
+//       from: 'Newsbutler Jenkins <newsbutler.jenkins@googlemail.com>',
+//       to: req.body.mail, // list of receivers
+//       subject: 'Your news summary is ready', // Subject line
+//       hmtl: 'Hello ' + req.body.name + '!<br /><br />How are you doing? Here is the freshest information I could gather for you right now. Enjoy your news. Feel free to ring, when you need my services again.' // plaintext body
+//   };
+//
+//   // send mail with defined transport object
+//   transporter.sendMail(mailOptions, function(error, info){
+//       if(error){
+//           return console.log(error);
+//       }
+//       res.render('home');
+//   });
+// });
+
+app.post(/adduser/, urlencodedParser, function (req, res, next) {
+  var db = require('./db');
+  db.addUser(req.body.name, req.body.mail, req.body.time);
+
   var mailOptions = {
       from: 'Newsbutler Jenkins <newsbutler.jenkins@googlemail.com>',
       to: req.body.mail, // list of receivers
       subject: 'Your news summary is ready', // Subject line
-      text: 'Hello world' // plaintext body
+      html: 'Hello ' + req.body.name + '!<br /><br />How are you doing? Here is the freshest information I could gather for you right now. <a href="http://localhost:3000/dashboard">Enjoy your news</a>. Feel free to ring, when you need my services again.<br/><br/>Sincerly<br/>Jenkins<br/>News Butler' // plaintext body
   };
 
   // send mail with defined transport object
@@ -56,8 +76,9 @@ app.post(/mail/, urlencodedParser, function (req, res, next) {
       if(error){
           return console.log(error);
       }
-      res.render('home');
   });
+
+  res.render('home');
 });
 
 //Add static folder

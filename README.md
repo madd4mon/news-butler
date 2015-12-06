@@ -23,6 +23,7 @@ News Butler uses [express-handlebars](https://github.com/ericf/express-handlebar
 The software was written in less than 48 hours. This is why there is a lot of potential for growth. Here are ideas we had but couldn't realize in the time given.
 
 * develop a native app for Android and iOS
+* teaching the software to discern already read articles and new ones
 * different color themes for further customization
 * different interval settings for multiple reminders during the day
 * even more news publisher APIs to include
