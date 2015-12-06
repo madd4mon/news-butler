@@ -9,19 +9,20 @@ var getArticles = function (cb){
 
         var articles = [];
         var url = [];
+
         articleTags.forEach(function(articleTag){
             var articlesForTag = articleTag["articles"];
+            console.log(articleTag["_id"]["tag"]);
 
-            var firstArticle = articlesForTag[0];
-
-            if (url.indexOf(firstArticle["url"]) == -1){
-                articles.push(firstArticle);
-                url.push(firstArticle["url"]);
-
+            for (var i = 0; i < articlesForTag.length; i++) {
+                var article = articlesForTag[i];
+                if (url.indexOf(article["url"]) == -1){
+                    articles.push(article);
+                    url.push(article["url"]);
+                    break;
+                }
             }
         });
-
-        
         cb(articles);
     });
 };
