@@ -8,12 +8,20 @@ var getArticles = function (cb){
         }
 
         var articles = [];
+        var url = [];
         articleTags.forEach(function(articleTag){
             var articlesForTag = articleTag["articles"];
-            articles.push(articlesForTag[0]);
+
+            var firstArticle = articlesForTag[0];
+
+            if (url.indexOf(firstArticle["url"]) == -1){
+                articles.push(firstArticle);
+                url.push(firstArticle["url"]);
+
+            }
         });
-        console.log("-----");
-        console.log(articles);
+
+        
         cb(articles);
     });
 };
